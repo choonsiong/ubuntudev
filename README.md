@@ -1,5 +1,7 @@
 # About
 
+A basic Ubuntu container with packages installed for C and Go development.
+
 ### To run the container using downloaded image
 
 Pull the image with `docker pull choonsiong/ubuntudev`, then run it with `docker container run -it choonsiong/ubuntudev bash`
