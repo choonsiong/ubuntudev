@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+    ubuntu:
+        image: my-ubuntu
+        build: .
+        networks:
+            - my_net
+        volumes:
+            - ~/Root/Playground:/root/Playground
+networks:
+    my_net:
+        driver: bridge
