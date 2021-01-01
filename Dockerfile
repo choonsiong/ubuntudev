@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # Install packages required
 RUN apt-get update && apt-get install -y binutils build-essential sysstat strace vim iputils-ping iproute2 curl wget
