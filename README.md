@@ -1,8 +1,8 @@
-# Notes
+# About
 
 ### To run the container using downloaded image
 
-Run the container with `$ docker pull choonsiong/ubuntudev`
+Pull the image with `docker pull choonsiong/ubuntudev`, then run it with `docker container run -it choonsiong/ubuntudev bash`
 
 ```
  18:20:29 364  docker pull choonsiong/ubuntudev
@@ -45,7 +45,7 @@ root@94da9e17ecaf:~#
 
 First clone the git repository.
 
-Start the container with `$ docker-compose run ubuntu bash`
+Start the container with `docker-compose run ubuntu bash`
 
 ```
  15:02:30 364  docker-compose run ubuntu bash
@@ -62,3 +62,7 @@ The new 'docker compose' command is currently experimental. To provide feedback 
  ⠿ Network "ubuntudev_my_net"                   Removed                                                                                                                                                                                                  0.0s
  15:02:41 364  
 ```
+
+> Note:
+>
+> This repository is link to Docker Hub and is automatically build after `git push`
