@@ -2,13 +2,17 @@
 
 A basic Ubuntu container with packages installed for C and Go development.
 
-### To run the container using downloaded image
+> Note:
+>
+> This repository is link to Docker Hub and is automatically build after `git push`
 
-Pull the image with `docker pull choonsiong/ubuntudev`, then run it with `docker container run -it choonsiong/ubuntudev bash`
+## To run the container using `docker container run`
+
+Run the command `docker container run -it --name ubuntudev -v ~/Root/Playground:/root/Playground choonsiong/ubuntudev`
 
 ```
- 18:20:29 364  docker pull choonsiong/ubuntudev
-Using default tag: latest
+ 22:26:51 364  docker container run -it --name ubuntudev -v ~/Root/Playground:/root/Playground choonsiong/ubuntudev
+Unable to find image 'choonsiong/ubuntudev:latest' locally
 latest: Pulling from choonsiong/ubuntudev
 da7391352a9b: Already exists 
 14428a6d4bcd: Already exists 
@@ -26,28 +30,48 @@ f86c57918e82: Pull complete
 edcf0520aded: Pull complete 
 Digest: sha256:9456f5dfc3f59b2e19a88245e91d9b38252eaf5f053a680ff2e7b812ed5e1261
 Status: Downloaded newer image for choonsiong/ubuntudev:latest
-docker.io/choonsiong/ubuntudev:latest
- 18:21:08 364
- 18:21:09 364  docker container run -it choonsiong/ubuntudev bash
-root@94da9e17ecaf:~# 
-root@94da9e17ecaf:~# go version
-go version go1.15.6 linux/amd64
-root@94da9e17ecaf:~# 
-root@94da9e17ecaf:~# valgrind --version
-valgrind-3.15.0
-root@94da9e17ecaf:~# 
-root@94da9e17ecaf:~# gcc
-gcc: fatal error: no input files
-compilation terminated.
-root@94da9e17ecaf:~# 
-root@94da9e17ecaf:~# 
+root@12d6db43dc7c:~#    
+root@12d6db43dc7c:~# ls
+Go  Playground
+root@12d6db43dc7c:~# 
 ```
 
-### To run the container using compose
+## To start a stop container
 
-First clone the git repository.
+First start the container then user the `exec` command to get into the shell.
 
-Start the container with `docker-compose run ubuntu bash`
+```
+ 22:35:43 364  
+ 22:35:43 364  docker container ls -a
+CONTAINER ID   IMAGE                  COMMAND       CREATED         STATUS                     PORTS     NAMES
+67ba65e18ca0   choonsiong/ubuntudev   "/bin/bash"   3 minutes ago   Exited (0) 3 minutes ago             ubuntudev
+ 22:35:47 364  
+ 22:35:48 364  docker container start ubuntudev
+ubuntudev
+ 22:35:53 364  
+ 22:37:13 364  docker container ls   
+CONTAINER ID   IMAGE                  COMMAND       CREATED         STATUS              PORTS     NAMES
+67ba65e18ca0   choonsiong/ubuntudev   "/bin/bash"   4 minutes ago   Up About a minute             ubuntudev
+ 22:37:16 364  
+ 22:37:16 364  
+ 22:37:16 364  
+ 22:37:17 364  docker container exec -it ubuntudev bash
+root@67ba65e18ca0:~# 
+root@67ba65e18ca0:~# ls
+Go  Playground
+root@67ba65e18ca0:~# 
+root@67ba65e18ca0:~# exit
+exit
+ 22:37:29 364   
+```
+
+## To run the container using `docker compose`
+
+First clone the git repository, then start the container with `docker-compose run ubuntu bash`
+
+The volume is mounted automatically when using `docker-compose` (you will need to create the local mount point).
+
+This is useful if you do not want to keep the container after using it (`docker compose down` will clean up the created container etc).
 
 ```
  15:02:30 364  docker-compose run ubuntu bash
@@ -64,7 +88,3 @@ The new 'docker compose' command is currently experimental. To provide feedback 
  ⠿ Network "ubuntudev_my_net"                   Removed                                                                                                                                                                                                  0.0s
  15:02:41 364  
 ```
-
-> Note:
->
-> This repository is link to Docker Hub and is automatically build after `git push`
