@@ -8,10 +8,14 @@ A basic Ubuntu container with packages installed for C and Go development.
 
 ## To run the container using `docker container run`
 
-Run the command `docker container run -it --name ubuntudev -v ~/Root/Playground:/root/Playground choonsiong/ubuntudev`
+> Note:
+>
+> `~/data` is just a directory I use to keep all my programming source code, you can replace it with other directory, but it will still mounted under /root/playground inside the container 😅
+
+Run the command `docker container run -it --name ubuntudev -v ~/data:/root/playground choonsiong/ubuntudev`
 
 ```
- 22:26:51 364  docker container run -it --name ubuntudev -v ~/Root/Playground:/root/Playground choonsiong/ubuntudev
+ 22:26:51 364  docker container run -it --name ubuntudev -v ~/data:/root/playground choonsiong/ubuntudev
 Unable to find image 'choonsiong/ubuntudev:latest' locally
 latest: Pulling from choonsiong/ubuntudev
 da7391352a9b: Already exists 
@@ -32,7 +36,7 @@ Digest: sha256:9456f5dfc3f59b2e19a88245e91d9b38252eaf5f053a680ff2e7b812ed5e1261
 Status: Downloaded newer image for choonsiong/ubuntudev:latest
 root@12d6db43dc7c:~#    
 root@12d6db43dc7c:~# ls
-Go  Playground
+go  playground
 root@12d6db43dc7c:~# 
 ```
 
@@ -58,7 +62,7 @@ CONTAINER ID   IMAGE                  COMMAND       CREATED         STATUS      
  22:37:17 364  docker container exec -it ubuntudev bash
 root@67ba65e18ca0:~# 
 root@67ba65e18ca0:~# ls
-Go  Playground
+go  playground
 root@67ba65e18ca0:~# 
 root@67ba65e18ca0:~# exit
 exit
