@@ -10,12 +10,12 @@ A basic Ubuntu container with packages installed for C and Go development.
 
 > Note:
 >
-> `~/data` is just a directory I use to keep all my programming source code, you can replace it with other directory, but it will still mounted under /root/playground inside the container 😅
+> `~/Root/Playground` is just a directory I use to keep all my programming source code, you can replace it with other directory, but it will still mounted under /root/playground inside the container 😅, you can remove the `-v ...` below if you do not want to bind mount the directory.
 
-Run the command `docker container run -it --name ubuntudev -v ~/data:/root/playground choonsiong/ubuntudev`
+Run the command `docker container run -it --name ubuntudev -v ~/Root/Playground:/root/playground choonsiong/ubuntudev`
 
 ```
- 22:26:51 364  docker container run -it --name ubuntudev -v ~/data:/root/playground choonsiong/ubuntudev
+ 22:26:51 364  docker container run -it --name ubuntudev -v ~/Root/Playground:/root/playground choonsiong/ubuntudev
 Unable to find image 'choonsiong/ubuntudev:latest' locally
 latest: Pulling from choonsiong/ubuntudev
 da7391352a9b: Already exists 
