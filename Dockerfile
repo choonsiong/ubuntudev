@@ -5,24 +5,28 @@ RUN apt-get update && apt-get install -y binutils build-essential sysstat strace
 
 # Install Valgrind, (tzdata is installed first to prevent asking for timezone configuration during valgrind installation)
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TIMEZONE=/usr/share/zoneinfo/UTC
 RUN set -ex; \
     apt-get install -y tzdata; \
-    ln -fs /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime; \
+    ln -fs "$TIMEZONE" /etc/localtime; \
     apt-get install -y valgrind; \
     apt-get clean
     
-# Create directories for bind mount
+# Create directories for Go installation and bind mount
+ENV GO_INSTALL_DIR=/usr/local/go
+ENV MY_PLAYGROUND="$HOME"/playground
 RUN set -ex; \
-    mkdir /root/Playground; \
-    mkdir /root/Go
+    mkdir -p "$HOME/go/src" "$HOME"/go/pkg "$HOME"/go/bin; \
+    mkdir -p "$MY_PLAYGROUND";
 
 # Install Go
-WORKDIR /root/Go
+WORKDIR /usr/local
+ENV GO_TAR=https://golang.org/dl/go1.15.6.linux-amd64.tar.gz
 RUN set -ex; \
-    wget -c https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -O - | tar -xz; \
-    echo "GOROOT=$HOME/Go/go" >> /root/.bashrc; \
-    echo "GOPATH=$HOME/Playground/go" >> /root/.bashrc; \
-    echo "GOBIN=$HOME/Go/go/bin" >> /root/.bashrc; \
-    echo "PATH=$PATH:$HOME/Go/go/bin" >> /root/.bashrc
+    wget -c "$GO_TAR" -O - | tar -xz; \
+    echo "GOROOT=$GO_INSTALL_DIR" >> /root/.bashrc; \
+    echo "GOPATH=$HOME/go" >> /root/.bashrc; \
+    echo "GOBIN=$GO_INSTALL_DIR/bin" >> /root/.bashrc; \
+    echo "PATH=$PATH:$GO_INSTALL_DIR/bin" >> /root/.bashrc
 
 WORKDIR /root
