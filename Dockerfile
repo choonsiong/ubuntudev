@@ -21,7 +21,7 @@ RUN set -ex; \
 
 # Install Go
 WORKDIR /usr/local
-ENV GO_TAR=https://golang.org/dl/go1.15.6.linux-amd64.tar.gz
+ENV GO_TAR=https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
 RUN set -ex; \
     wget -c "$GO_TAR" -O - | tar -xz; \
     echo "GOROOT=$GO_INSTALL_DIR" >> /root/.bashrc; \
